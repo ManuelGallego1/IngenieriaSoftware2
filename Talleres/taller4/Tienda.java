@@ -1,31 +1,28 @@
 package taller4;
 
-// Clase abstracta Calculo
 abstract class Calculo {
     private String producto;
     private int cantidad;
     private int precio;
    
-    // Constructor
     public Calculo(String producto, int cantidad, int precio) {
         this.producto = producto;
         this.cantidad = cantidad;
         this.precio = precio;
     }
    
-    // Getters
     public String getProducto() { return producto; }
     public int getCantidad() { return cantidad; }
     public int getPrecio() { return precio; }
 
-    // Métodos abstractos para cálculo de impuestos y nombre del impuesto
     abstract double calcularImpuesto();
+
     abstract String obtenerNombreImpuesto();
 }
 
-// Clase para calcular IVA
-class CalculoImpuesto extends Calculo {
-    private static final double IVA = 0.19;
+
+ class CalculoImpuesto extends Calculo {
+    private final double IVA = 0.19;
 
     public CalculoImpuesto(String producto, int cantidad, int precio) {
         super(producto, cantidad, precio);
@@ -42,9 +39,8 @@ class CalculoImpuesto extends Calculo {
     }
 }
 
-// Clase para calcular Rete IVA
 class CalculoImpuestoRelativa extends Calculo {
-    private static final double RETE_IVA = 0.10;
+    private final double RETE_IVA = 0.10;
 
     public CalculoImpuestoRelativa(String producto, int cantidad, int precio) {
         super(producto, cantidad, precio);
@@ -61,9 +57,8 @@ class CalculoImpuestoRelativa extends Calculo {
     }
 }
 
-// Clase para calcular Impuesto Saludable
 class CalculoImpuestoSaludable extends Calculo {
-    private static final double SALUD = 0.05;
+    private final double SALUD = 0.05;
 
     public CalculoImpuestoSaludable(String producto, int cantidad, int precio) {
         super(producto, cantidad, precio);
@@ -80,7 +75,6 @@ class CalculoImpuestoSaludable extends Calculo {
     }
 }
 
-// Clase Factura que procesa el cálculo de impuestos
 class Factura {
     public void procesarImpuesto(Calculo calculo) {
         double impuesto = calculo.calcularImpuesto();
@@ -94,7 +88,6 @@ class Factura {
     }
 }
 
-// Clase principal Tienda
 public class Tienda {
     public static void main(String[] args) {
         String producto = "Celular";
@@ -103,7 +96,6 @@ public class Tienda {
 
         Factura factura = new Factura();
 
-        // Instancias de las diferentes implementaciones de Calculo
         Calculo calculoIva = new CalculoImpuesto(producto, cantidad, precio);
         factura.procesarImpuesto(calculoIva);
 
